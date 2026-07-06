@@ -142,10 +142,10 @@ abstract class ValueObject implements JsonSerializable, Stringable, VO
         $payload = [];
 
         foreach ($this->normalizedGetterMap() as $key => $definition) {
-            if (is_callable($definition)) {
-                $value = $definition($this);
-            } elseif (is_string($definition)) {
+            if (is_string($definition)) {
                 $value = $this->get($definition);
+            } elseif (is_callable($definition)) {
+                $value = $definition($this);
             } else {
                 $value = $definition;
             }

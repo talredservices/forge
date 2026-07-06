@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.2] - 2026-07-06
+### Fixed
+- Prevented infinite recursion when value objects serialize string-named getters like `value`
+- Aligned the specification base contract with abstract specification implementations
+
+---
+
 ## [1.0.1] - 2026-04-28
 ### Fixed
 - Pagination items type hint and property accessor visibility

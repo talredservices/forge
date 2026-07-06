@@ -233,7 +233,7 @@ trait VOAutoResolution
         foreach (array_keys($runtimePreprocessors) as $propName) {
             if (! in_array($propName, $voProperties, true)) {
                 throw new InvalidArgumentException(
-                    "Runtime preprocessor cannot be applied: property '{$propName}' does not exist in " . static::class
+                    "Runtime preprocessor cannot be applied: property '{$propName}' does not exist in ".static::class
                 );
             }
         }
@@ -482,7 +482,7 @@ trait VOAutoResolution
 
                         continue;
                     } catch (\Throwable $e) {
-                        throw new DomainException("Failed to coerce enum property {$name}: " . $e->getMessage(), $e->getCode(), $e);
+                        throw new DomainException("Failed to coerce enum property {$name}: ".$e->getMessage(), $e->getCode(), $e);
                     }
                 }
             }
@@ -519,7 +519,7 @@ trait VOAutoResolution
             if (property_exists($this, $key)) {
                 return $this->$key;
             }
-            throw new InvalidArgumentException("Key {$key} is not accessible on " . static::class);
+            throw new InvalidArgumentException("Key {$key} is not accessible on ".static::class);
         }
 
         if (is_array($key)) {
@@ -544,12 +544,12 @@ trait VOAutoResolution
         try {
             return $this->get($name);
         } catch (InvalidArgumentException) {
-            throw new InvalidArgumentException("Property '{$name}' does not exist on " . static::class);
+            throw new InvalidArgumentException("Property '{$name}' does not exist on ".static::class);
         }
     }
 
     public function __set(string $name, mixed $value): void
     {
-        throw new \LogicException("Cannot set property '{$name}' on immutable ValueObject " . static::class);
+        throw new \LogicException("Cannot set property '{$name}' on immutable ValueObject ".static::class);
     }
 }

@@ -6,10 +6,7 @@ namespace Zolta\Domain\Contracts;
 
 abstract class Specification implements SpecificationInterface
 {
-    public function isSatisfiedBy(mixed $candidate, array $options = []): bool
-    {
-        throw new \BadMethodCallException('isSatisfiedBy() not implemented');
-    }
+    abstract public function isSatisfiedBy(mixed $candidate, array $options = []): bool;
 
     public function message(): string
     {
