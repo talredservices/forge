@@ -26,7 +26,7 @@ The recommendations below do not propose replacing that model. They focus on mak
 
 Although this memo lives in Forge, the work spans:
 
-- `zolta/forge`: domain primitives, DTO foundations, errors, architecture contracts
+- `talred/forge`: domain primitives, DTO foundations, errors, architecture contracts
 - `zolta/cqrs`: commands, queries, results, events, transactions, generated maps
 - `zolta/http`: request pipelines, controller attributes, resources, error rendering, OpenAPI
 - shared tooling: diagnostics, static analysis, scaffolding, CI verification, documentation

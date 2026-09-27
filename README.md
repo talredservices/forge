@@ -46,7 +46,7 @@ Every stage is **declarative** (PHP 8 attributes), **composable** (`.and()`, `.o
 ## Installation
 
 ```bash
-composer require zolta/forge
+composer require talred/forge
 ```
 
 Laravel adapter discovery is automatic through Composer metadata.
@@ -218,7 +218,7 @@ Forge is the **foundation layer** — consumed by the application and transport 
 │  zolta/cqrs (Application)                   │
 │  Commands, queries, events, transactions    │
 ├─────────────────────────────────────────────┤
-│  zolta/forge (Domain) ← you are here        │
+│  talred/forge (Domain) ← you are here        │
 │  Value Objects, rules, specs, entities      │
 └─────────────────────────────────────────────┘
 ```
@@ -229,7 +229,7 @@ Forge is the **foundation layer** — consumed by the application and transport 
 
 | Package | Layer | Link |
 |---------|-------|------|
-| **zolta/forge** | **Domain** | You are here |
+| **talred/forge** | **Domain** | You are here |
 | zolta/cqrs | Application | [`packages/cqrs`](../cqrs) |
 | zolta/http | Transport | [`packages/http`](../http) |
 

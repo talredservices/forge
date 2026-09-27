@@ -1,5 +1,5 @@
 {
-	"name": "zolta/forge",
+	"name": "talred/forge",
 	"description": "Domain layer foundation for PHP 8.2+ providing Value Objects with attribute-based validation, Entities, Aggregates, Rules, Specifications, Policies, Invariants, Transformers, and a framework-agnostic adapter system.",
 	"type": "library",
 	"license": "MIT",
