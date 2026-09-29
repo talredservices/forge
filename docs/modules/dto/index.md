@@ -8,14 +8,14 @@ navigation:
 
 # DTO System
 
-Zolta Forge provides a base DTO (Data Transfer Object) system for structuring data flow between application layers. DTOs ensure type-safe, immutable data exchange between controllers, services, and responses.
+Talred Forge provides a base DTO (Data Transfer Object) system for structuring data flow between application layers. DTOs ensure type-safe, immutable data exchange between controllers, services, and responses.
 
 ## DTO interfaces
 
 ### Marker interface
 
 ```php
-namespace Zolta\Support\Application\DTO\Interfaces;
+namespace Talred\Support\Application\DTO\Interfaces;
 
 interface DTO
 {
@@ -26,7 +26,7 @@ interface DTO
 ### InputDTO interface
 
 ```php
-namespace Zolta\Support\Application\DTO\Interfaces;
+namespace Talred\Support\Application\DTO\Interfaces;
 
 interface InputDTO extends DTO
 {
@@ -37,7 +37,7 @@ interface InputDTO extends DTO
 ### ResponseDTO interface
 
 ```php
-namespace Zolta\Support\Application\DTO\Interfaces;
+namespace Talred\Support\Application\DTO\Interfaces;
 
 interface ResponseDTO extends DTO
 {
@@ -50,9 +50,9 @@ interface ResponseDTO extends DTO
 ### InputDTO
 
 ```php
-namespace Zolta\Support\Application\DTO\Input;
+namespace Talred\Support\Application\DTO\Input;
 
-use Zolta\Support\Traits\Normalizable;
+use Talred\Support\Traits\Normalizable;
 
 abstract class InputDTO implements DTO, InputDTOInterface
 {
@@ -63,9 +63,9 @@ abstract class InputDTO implements DTO, InputDTOInterface
 ### ResponseDTO
 
 ```php
-namespace Zolta\Support\Application\DTO\Output;
+namespace Talred\Support\Application\DTO\Output;
 
-use Zolta\Support\Traits\Normalizable;
+use Talred\Support\Traits\Normalizable;
 
 abstract class ResponseDTO implements DTO, ResponseDTOInterface
 {
@@ -86,7 +86,7 @@ declare(strict_types=1);
 
 namespace App\Application\DTO;
 
-use Zolta\Support\Application\DTO\Input\InputDTO;
+use Talred\Support\Application\DTO\Input\InputDTO;
 
 final readonly class CreateUserInput extends InputDTO
 {
@@ -108,7 +108,7 @@ declare(strict_types=1);
 
 namespace App\Application\DTO;
 
-use Zolta\Support\Application\DTO\Output\ResponseDTO;
+use Talred\Support\Application\DTO\Output\ResponseDTO;
 
 final readonly class UserResponse extends ResponseDTO
 {
@@ -127,7 +127,7 @@ final readonly class UserResponse extends ResponseDTO
 The `Normalizable` trait provides automatic object-to-array conversion:
 
 ```php
-namespace Zolta\Support\Traits;
+namespace Talred\Support\Traits;
 
 trait Normalizable
 {
@@ -141,13 +141,13 @@ trait Normalizable
 
 1. Custom factory set via `setNormalizerFactory()`
 2. `NormalizerInterface` resolved from the Laravel container
-3. Default `Zolta\Support\Serialization\Normalizer` (Symfony ObjectNormalizer)
+3. Default `Talred\Support\Serialization\Normalizer` (Symfony ObjectNormalizer)
 4. `RuntimeException` if no normalizer is available
 
 ### Custom normalizer factory
 
 ```php
-use Zolta\Support\Traits\Normalizable;
+use Talred\Support\Traits\Normalizable;
 
 Normalizable::setNormalizerFactory(function () {
     return new CustomNormalizer();
@@ -161,7 +161,7 @@ Normalizable::setNormalizerFactory(function () {
 Maps a controller/handler parameter to a request field:
 
 ```php
-namespace Zolta\Support\Application\Attributes;
+namespace Talred\Support\Application\Attributes;
 
 #[Attribute(Attribute::TARGET_PARAMETER | Attribute::TARGET_PROPERTY)]
 class FromRequest
@@ -206,7 +206,7 @@ class SearchHandler
 Marks a class as an application service for CQRS autoconfiguration:
 
 ```php
-namespace Zolta\Support\Application\Attributes;
+namespace Talred\Support\Application\Attributes;
 
 #[Attribute(Attribute::TARGET_CLASS)]
 class AsApplicationService
@@ -218,7 +218,7 @@ class AsApplicationService
 Usage:
 
 ```php
-use Zolta\Support\Application\Attributes\AsApplicationService;
+use Talred\Support\Application\Attributes\AsApplicationService;
 
 #[AsApplicationService]
 class UserRegistrationService

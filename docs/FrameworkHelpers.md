@@ -1,18 +1,18 @@
 ---
 title: Framework Helpers
-description: How the strict, framework-neutral `app()` helper works in Zolta Forge and when to use it.
+description: How the strict, framework-neutral `app()` helper works in Talred Forge and when to use it.
 ---
 
 # Framework Helpers
 
 ## Purpose
 
-Zolta Forge exposes a single helper—`app()`—that clients in the API or Application layers can use to resolve collaborators without depending on Laravel’s or Symfony’s container APIs. The rest of the code (domain, application) sees only the PSR-11 contract, guaranteeing portability across frameworks.
+Talred Forge exposes a single helper—`app()`—that clients in the API or Application layers can use to resolve collaborators without depending on Laravel’s or Symfony’s container APIs. The rest of the code (domain, application) sees only the PSR-11 contract, guaranteeing portability across frameworks.
 
 ## Container architecture
 
-1. `Zolta\Core\Support\ZoltaForgeContainer` wraps any PSR-11 container and exposes only `get()`/`has()`. Any other method call throws a `RuntimeException`, preventing consumers from calling Laravel-only helpers such as `make`, `bind`, or `instance`.
-2. `Zolta\Core\Support\ContainerRegistry` stores the strict wrapper and exposes it through a static API. Framework adapters call `ContainerRegistry::set(new ZoltaForgeContainer($frameworkContainer));` during boot.
+1. `Talred\Support\ZoltaForgeContainer` wraps any PSR-11 container and exposes only `get()`/`has()`. Any other method call throws a `RuntimeException`, preventing consumers from calling Laravel-only helpers such as `make`, `bind`, or `instance`.
+2. `Talred\Support\ContainerRegistry` stores the strict wrapper and exposes it through a static API. Framework adapters call `ContainerRegistry::set(new ZoltaForgeContainer($frameworkContainer));` during boot.
 
 ## The `app()` helper
 
@@ -58,4 +58,4 @@ Any new adapter must repeat this pattern to keep the helper portable.
 - Avoid leaking `app()` into the Domain layer; keep it in API, Application, or Infrastructure.
 - Treat the helper as a PSR-11 port: rely only on `get()`/`has()` and let the framework adapter decide how services are wired.
 
-With this helper, Zolta Forge keeps your code portable, testable, and framework-agnostic. Keep it the only entry point whenever you need to resolve a service from the container.
+With this helper, Talred Forge keeps your code portable, testable, and framework-agnostic. Keep it the only entry point whenever you need to resolve a service from the container.

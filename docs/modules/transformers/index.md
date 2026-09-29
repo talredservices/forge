@@ -13,7 +13,7 @@ Transformers normalize input data **before** validation. They run as the first s
 ## Transformer interface
 
 ```php
-use Zolta\Domain\Contracts\TransformerInterface;
+use Talred\Domain\Contracts\TransformerInterface;
 
 interface TransformerInterface
 {
@@ -24,7 +24,7 @@ interface TransformerInterface
 ## Abstract Transformer contract
 
 ```php
-use Zolta\Domain\Contracts\Transformer;
+use Talred\Domain\Contracts\Transformer;
 
 abstract class Transformer implements TransformerInterface
 {
@@ -41,8 +41,8 @@ The `and()` method creates a pipeline: the output of the first transformer becom
 Attach transformers to properties with `#[Transform]`:
 
 ```php
-use Zolta\Domain\Attributes\Transform;
-use Zolta\Domain\Transformers\EmailNormalizer;
+use Talred\Domain\Attributes\Transform;
+use Talred\Domain\Transformers\EmailNormalizer;
 
 class Email extends ValueObject
 {
@@ -158,7 +158,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Transformers;
 
-use Zolta\Domain\Contracts\Transformer;
+use Talred\Domain\Contracts\Transformer;
 
 class SlugTransformer extends Transformer
 {

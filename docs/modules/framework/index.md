@@ -8,7 +8,7 @@ navigation:
 
 # Framework Adapter
 
-Zolta Forge is designed to run on **any PHP framework**. The Framework Adapter module discovers available adapters at boot time using Composer metadata and resolves bindings through a priority-based registry.
+Talred Forge is designed to run on **any PHP framework**. The Framework Adapter module discovers available adapters at boot time using Composer metadata and resolves bindings through a priority-based registry. The `zolta-framework-adapter` metadata key is retained as a technical compatibility key.
 
 ## Architecture overview
 
@@ -33,7 +33,7 @@ Composer metadata (extra.zolta-framework-adapter)
 Every adapter implements this contract:
 
 ```php
-namespace Zolta\Framework;
+namespace Talred\Framework;
 
 interface FrameworkAdapterInterface
 {
@@ -58,7 +58,7 @@ declare(strict_types=1);
 
 namespace Zolta\Adapters\Laravel;
 
-use Zolta\Framework\FrameworkAdapterInterface;
+use Talred\Framework\FrameworkAdapterInterface;
 
 class LaravelAdapter implements FrameworkAdapterInterface
 {
@@ -75,8 +75,8 @@ class LaravelAdapter implements FrameworkAdapterInterface
     public static function bindings(): array
     {
         return [
-            \Zolta\Support\Contracts\NormalizerInterface::class
-                => \Zolta\Support\Serialization\Normalizer::class,
+            \Talred\Support\Contracts\NormalizerInterface::class
+                => \Talred\Support\Serialization\Normalizer::class,
             \Psr\Log\LoggerInterface::class
                 => \Illuminate\Log\LogManager::class,
         ];
@@ -89,7 +89,7 @@ class LaravelAdapter implements FrameworkAdapterInterface
 Discovers adapters from Composer package metadata and boots the framework layer.
 
 ```php
-namespace Zolta\Framework;
+namespace Talred\Framework;
 
 final class FrameworkBootstrap
 {
@@ -113,7 +113,7 @@ Register your adapter in `composer.json`:
 
 ```json
 {
-    "name": "zoltasoft/forge-laravel-adapter",
+    "name": "talred/forge-laravel-adapter",
     "extra": {
         "zolta-framework-adapter": "Zolta\\Adapters\\Laravel\\LaravelAdapter"
     }
@@ -138,7 +138,7 @@ Multiple adapters per package:
 Central registry that tracks adapters and resolves bindings.
 
 ```php
-namespace Zolta\Framework;
+namespace Talred\Framework;
 
 final class FrameworkRegistry
 {
@@ -157,13 +157,13 @@ final class FrameworkRegistry
 5. Caches results to avoid redundant lookups
 
 ```php
-use Zolta\Framework\FrameworkRegistry;
+use Talred\Framework\FrameworkRegistry;
 
 // Resolve which class implements NormalizerInterface
 $concrete = FrameworkRegistry::resolveBinding(
-    \Zolta\Support\Contracts\NormalizerInterface::class,
+    \Talred\Support\Contracts\NormalizerInterface::class,
 );
-// → 'Zolta\Support\Serialization\Normalizer'
+// → 'Talred\Support\Serialization\Normalizer'
 ```
 
 ### Adapter priority
@@ -193,4 +193,4 @@ ContainerRegistry::set(app());
 $normalizer = ContainerRegistry::resolve(NormalizerInterface::class);
 ```
 
-In Laravel, this is handled automatically by the Zolta service providers. For other frameworks, call `FrameworkBootstrap::boot()` and `ContainerRegistry::set()` during your application bootstrap.
+In Laravel, this is handled automatically by the Talred service providers. For other frameworks, call `FrameworkBootstrap::boot()` and `ContainerRegistry::set()` during your application bootstrap.

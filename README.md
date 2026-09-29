@@ -1,4 +1,4 @@
-# Zolta Forge
+# Talred Forge
 
 **The missing domain layer for PHP.**
 
@@ -24,7 +24,7 @@ PHP's ecosystem has excellent tools for persistence (Eloquent, Doctrine) and HTT
 | Manual VOs | Hand-written constructors with inline validation | No reuse, no composition, no discovery |
 | Spatie Laravel Data | Data transfer objects with casting | Persistence-layer focused, no domain rules/specs/invariants |
 | Doctrine Embeddables | ORM-coupled value types | Tied to Doctrine lifecycle, no standalone resolution |
-| **Zolta Forge** | **Attribute-driven pipeline: Transform → Validate → Specify → Construct → Enforce** | **Zero inheritance tax, composable, framework-agnostic** |
+| **Talred Forge** | **Attribute-driven pipeline: Transform → Validate → Specify → Construct → Enforce** | **Zero inheritance tax, composable, framework-agnostic** |
 
 Forge treats Value Object construction as a **pipeline**, not a constructor:
 
@@ -51,6 +51,14 @@ composer require talred/forge
 
 Laravel adapter discovery is automatic through Composer metadata.
 
+### Namespace compatibility
+
+`talred/forge` exposes the public `Talred\...` namespaces while keeping the
+existing `Zolta\...` implementation and imports intact. New applications and
+examples should use `Talred\...`; existing applications can continue using
+`Zolta\...` during the staged migration. The compatibility aliases are
+additive and do not duplicate or rewrite the internal implementation.
+
 ---
 
 ## What's in the box
@@ -60,13 +68,13 @@ Laravel adapter discovery is automatic through Composer metadata.
 The centerpiece. Declare properties with attributes — Forge handles the rest:
 
 ```php
-use Zolta\Domain\Attributes\Transform;
-use Zolta\Domain\Attributes\UseRule;
-use Zolta\Domain\Attributes\UseSpecification;
-use Zolta\Domain\Rules\NonEmptyRule;
-use Zolta\Domain\Transformers\EmailNormalizer;
-use Zolta\Domain\Specifications\EmailFormatSpecification;
-use Zolta\Domain\ValueObjects\ValueObject;
+use Talred\Domain\Attributes\Transform;
+use Talred\Domain\Attributes\UseRule;
+use Talred\Domain\Attributes\UseSpecification;
+use Talred\Domain\Rules\NonEmptyRule;
+use Talred\Domain\Transformers\EmailNormalizer;
+use Talred\Domain\Specifications\EmailFormatSpecification;
+use Talred\Domain\ValueObjects\ValueObject;
 
 final class Email extends ValueObject
 {
@@ -153,7 +161,7 @@ ContainerRegistry::set(app()); // PSR-11 compatible
 $logger = ContainerRegistry::resolve(LoggerInterface::class);
 ```
 
-Consumer packages (`zolta/cqrs`, `zolta/http`) use this same mechanism to stay decoupled.
+Consumer packages (`talred/cqrs`, `talred/http`) use this same mechanism to stay decoupled.
 
 ---
 
@@ -194,7 +202,7 @@ Monorepo runner:
 ./scripts/run-package-tests.sh packages/forge qa
 ```
 
-**50 tests, 71 assertions** covering VO resolution, rule composition, specification logic, invariant enforcement, entity events, and adapter discovery.
+**58 tests, 88 assertions** covering VO resolution, rule composition, specification logic, invariant enforcement, entity events, adapter discovery, and Talred namespace compatibility.
 
 ---
 
@@ -206,16 +214,16 @@ Monorepo runner:
 
 ---
 
-## Part of the Zolta Ecosystem
+## Part of the Talred Ecosystem
 
 Forge is the **foundation layer** — consumed by the application and transport layers:
 
 ```
 ┌─────────────────────────────────────────────┐
-│  zolta/http (Transport)                     │
+│  talred/http (Transport)                     │
 │  Attribute-driven routing & response        │
 ├─────────────────────────────────────────────┤
-│  zolta/cqrs (Application)                   │
+│  talred/cqrs (Application)                   │
 │  Commands, queries, events, transactions    │
 ├─────────────────────────────────────────────┤
 │  talred/forge (Domain) ← you are here        │
@@ -230,8 +238,8 @@ Forge is the **foundation layer** — consumed by the application and transport 
 | Package | Layer | Link |
 |---------|-------|------|
 | **talred/forge** | **Domain** | You are here |
-| zolta/cqrs | Application | [`packages/cqrs`](../cqrs) |
-| zolta/http | Transport | [`packages/http`](../http) |
+| talred/cqrs | Application | [`packages/cqrs`](../cqrs) |
+| talred/http | Transport | [`packages/http`](../http) |
 
 ---
 

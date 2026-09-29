@@ -4,7 +4,7 @@
 	"type": "library",
 	"license": "MIT",
 	"keywords": [
-		"zolta",
+		"talred",
 		"forge",
 		"domain",
 		"ddd",
@@ -53,8 +53,12 @@
 			"Zolta\\Serialization\\": "src/Serialization/"
 		},
         "files": [
+            "src/Compatibility/talred-forge-aliases.php",
             "src/Support/helpers.php"
         ]
+	},
+	"replace": {
+		"zolta/forge": "self.version"
 	},
 	"autoload-dev": {
 		"psr-4": {

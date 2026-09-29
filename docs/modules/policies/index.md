@@ -13,7 +13,7 @@ Policies execute behavioral logic **after** a Value Object is fully constructed 
 ## Policy interface
 
 ```php
-use Zolta\Domain\Interfaces\Policy;
+use Talred\Domain\Interfaces\Policy;
 
 interface Policy
 {
@@ -24,7 +24,7 @@ interface Policy
 ## Abstract Policy contract
 
 ```php
-use Zolta\Domain\Contracts\Policy;
+use Talred\Domain\Contracts\Policy;
 
 abstract class Policy implements PolicyInterface
 {
@@ -38,8 +38,8 @@ abstract class Policy implements PolicyInterface
 Attach policies at the class level with `#[UsePolicy]`:
 
 ```php
-use Zolta\Domain\Attributes\UsePolicy;
-use Zolta\Domain\Policies\EmailPolicy;
+use Talred\Domain\Attributes\UsePolicy;
+use Talred\Domain\Policies\EmailPolicy;
 
 #[UsePolicy(EmailPolicy::class, [
     'requireVerified' => false,
@@ -97,7 +97,7 @@ Returns metadata about domain trust status.
 Handles password hashing and verification.
 
 ```php
-use Zolta\Domain\Policies\PasswordPolicy;
+use Talred\Domain\Policies\PasswordPolicy;
 
 $policy = new PasswordPolicy();
 
@@ -116,7 +116,7 @@ The policy uses `PASSWORD_BCRYPT` by default.
 Generates and validates access tokens.
 
 ```php
-use Zolta\Domain\Policies\AccessTokenPolicy;
+use Talred\Domain\Policies\AccessTokenPolicy;
 
 $policy = new AccessTokenPolicy();
 
@@ -148,8 +148,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Policies;
 
-use Zolta\Domain\Contracts\Policy;
-use Zolta\Domain\Interfaces\VO;
+use Talred\Domain\Contracts\Policy;
+use Talred\Domain\Interfaces\VO;
 
 class CreditLimitPolicy extends Policy
 {

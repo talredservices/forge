@@ -13,7 +13,7 @@ Entities represent domain objects with a unique identity that persists over time
 ## Entity
 
 ```php
-use Zolta\Domain\Entities\Entity;
+use Talred\Domain\Entities\Entity;
 ```
 
 ### Base class
@@ -48,7 +48,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Entities;
 
-use Zolta\Domain\Entities\Entity;
+use Talred\Domain\Entities\Entity;
 
 class OrderLine extends Entity
 {
@@ -77,7 +77,7 @@ class OrderLine extends Entity
 ## Aggregate Root
 
 ```php
-use Zolta\Domain\Aggregates\AggregateRoot;
+use Talred\Domain\Aggregates\AggregateRoot;
 ```
 
 `AggregateRoot` extends `Entity` and serves as the entry point for a cluster of related objects.
@@ -218,7 +218,7 @@ class User extends AggregateRoot
 Domain events are simple data objects that record what happened. They implement `EventInterface`:
 
 ```php
-use Zolta\Domain\Events\Contracts\EventInterface;
+use Talred\Domain\Events\Contracts\EventInterface;
 
 class OrderCreated implements EventInterface
 {

@@ -8,7 +8,7 @@ navigation:
 
 # Exceptions
 
-Zolta Forge provides a dual-layer exception system: **domain exceptions** for business logic violations and **REST exceptions** for API error responses. Both layers implement `RenderableExceptionInterface` for structured, consistent error output.
+Talred Forge provides a dual-layer exception system: **domain exceptions** for business logic violations and **REST exceptions** for API error responses. Both layers implement `RenderableExceptionInterface` for structured, consistent error output.
 
 ## Exception architecture
 
@@ -29,10 +29,10 @@ RenderableExceptionInterface
 
 ## RenderableExceptionInterface
 
-All Zolta exceptions implement this contract:
+All Talred exceptions implement this contract:
 
 ```php
-namespace Zolta\Exceptions\Contracts;
+namespace Talred\Exceptions\Contracts;
 
 interface RenderableExceptionInterface
 {
@@ -55,7 +55,7 @@ interface RenderableExceptionInterface
 Default implementations for the interface:
 
 ```php
-use Zolta\Exceptions\Traits\RenderableExceptionTrait;
+use Talred\Exceptions\Traits\RenderableExceptionTrait;
 
 // type() → Returns the short class name via Reflection
 // context() → Returns empty array (override in subclasses)
@@ -67,7 +67,7 @@ use Zolta\Exceptions\Traits\RenderableExceptionTrait;
 Abstract base class for all domain and REST exceptions:
 
 ```php
-namespace Zolta\Exceptions;
+namespace Talred\Exceptions;
 
 abstract class BaseException extends \Exception implements RenderableExceptionInterface
 {
@@ -98,7 +98,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Exceptions;
 
-use Zolta\Exceptions\BaseException;
+use Talred\Exceptions\BaseException;
 
 class InsufficientCreditsException extends BaseException
 {
@@ -143,7 +143,7 @@ Error output:
 Specialized exception for validation failures. Always returns HTTP 422.
 
 ```php
-namespace Zolta\Exceptions;
+namespace Talred\Exceptions;
 
 final class ValidationException extends \Exception implements RenderableExceptionInterface
 {
@@ -162,7 +162,7 @@ final class ValidationException extends \Exception implements RenderableExceptio
 ### Usage
 
 ```php
-use Zolta\Exceptions\ValidationException;
+use Talred\Exceptions\ValidationException;
 
 // Single-field errors
 throw new ValidationException([
@@ -198,7 +198,7 @@ Output:
 All REST exceptions extend `RestApiException` which itself extends `BaseException`:
 
 ```php
-namespace Zolta\Exceptions\Rest;
+namespace Talred\Exceptions\Rest;
 
 abstract class RestApiException extends BaseException
 {
@@ -214,7 +214,7 @@ abstract class RestApiException extends BaseException
 ### BadRequestException (400)
 
 ```php
-use Zolta\Exceptions\Rest\BadRequestException;
+use Talred\Exceptions\Rest\BadRequestException;
 
 throw new BadRequestException();
 // → 400 "Bad Request."
@@ -228,7 +228,7 @@ throw new BadRequestException(
 ### UnauthorizedException (401)
 
 ```php
-use Zolta\Exceptions\Rest\UnauthorizedException;
+use Talred\Exceptions\Rest\UnauthorizedException;
 
 throw new UnauthorizedException();
 // → 401 "Unauthorized."
@@ -237,7 +237,7 @@ throw new UnauthorizedException();
 ### ForbiddenException (403)
 
 ```php
-use Zolta\Exceptions\Rest\ForbiddenException;
+use Talred\Exceptions\Rest\ForbiddenException;
 
 throw new ForbiddenException();
 // → 403 "Forbidden."
@@ -248,7 +248,7 @@ throw new ForbiddenException();
 Supports a custom message:
 
 ```php
-use Zolta\Exceptions\Rest\NotFoundException;
+use Talred\Exceptions\Rest\NotFoundException;
 
 throw new NotFoundException();
 // → 404 "Resource not found."
@@ -265,7 +265,7 @@ throw new NotFoundException(
 ### ConflictException (409)
 
 ```php
-use Zolta\Exceptions\Rest\ConflictException;
+use Talred\Exceptions\Rest\ConflictException;
 
 throw new ConflictException();
 // → 409 "Conflict occurred."
@@ -274,7 +274,7 @@ throw new ConflictException();
 ### UnprocessableEntityException (422)
 
 ```php
-use Zolta\Exceptions\Rest\UnprocessableEntityException;
+use Talred\Exceptions\Rest\UnprocessableEntityException;
 
 throw new UnprocessableEntityException();
 // → 422 "Unprocessable entity."
@@ -285,7 +285,7 @@ throw new UnprocessableEntityException();
 Wraps an internal exception for safe error reporting:
 
 ```php
-use Zolta\Exceptions\Rest\InternalServerErrorException;
+use Talred\Exceptions\Rest\InternalServerErrorException;
 
 try {
     // risky operation
@@ -316,24 +316,24 @@ public function context(): array
 
 ## Domain-layer exceptions
 
-The domain layer mirrors the same exception hierarchy under `Zolta\Domain\Exceptions\*`:
+The domain layer mirrors the same exception hierarchy under `Talred\Domain\Exceptions\*`:
 
 ```php
-use Zolta\Domain\Exceptions\BaseException;
-use Zolta\Domain\Exceptions\ValidationException;
-use Zolta\Domain\Exceptions\Contracts\RenderableExceptionInterface;
-use Zolta\Domain\Exceptions\Traits\RenderableExceptionTrait;
+use Talred\Domain\Exceptions\BaseException;
+use Talred\Domain\Exceptions\ValidationException;
+use Talred\Domain\Exceptions\Contracts\RenderableExceptionInterface;
+use Talred\Domain\Exceptions\Traits\RenderableExceptionTrait;
 ```
 
 Use domain exceptions in entities, value objects, and domain services. Use REST exceptions in controllers and API handlers.
 
 ## Error handling in Laravel
 
-Zolta exceptions integrate seamlessly with Laravel's exception handler:
+Talred exceptions integrate seamlessly with Laravel's exception handler:
 
 ```php
 // app/Exceptions/Handler.php
-use Zolta\Exceptions\Contracts\RenderableExceptionInterface;
+use Talred\Exceptions\Contracts\RenderableExceptionInterface;
 
 public function render($request, Throwable $e)
 {

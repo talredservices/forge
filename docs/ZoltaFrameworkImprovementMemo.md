@@ -1,13 +1,13 @@
 ---
-title: Zolta Framework Improvement Memo
-description: Architecture and developer-experience improvements identified while building a modular Laravel application with Zolta Forge, CQRS, and HTTP.
+title: Talred Framework Improvement Memo
+description: Architecture and developer-experience improvements identified while building a modular Laravel application with Talred Forge, CQRS, and HTTP.
 ---
 
-# Zolta Framework Improvement Memo
+# Talred Framework Improvement Memo
 
 ## Purpose
 
-This memo records improvement opportunities observed while using the Zolta packages in a production-style modular application.
+This memo records improvement opportunities observed while using the Talred packages in a production-style modular application.
 
 The current architecture is strong because it is predictable and difficult to bypass accidentally:
 
@@ -27,8 +27,8 @@ The recommendations below do not propose replacing that model. They focus on mak
 Although this memo lives in Forge, the work spans:
 
 - `talred/forge`: domain primitives, DTO foundations, errors, architecture contracts
-- `zolta/cqrs`: commands, queries, results, events, transactions, generated maps
-- `zolta/http`: request pipelines, controller attributes, resources, error rendering, OpenAPI
+- `talred/cqrs`: commands, queries, results, events, transactions, generated maps
+- `talred/http`: request pipelines, controller attributes, resources, error rendering, OpenAPI
 - shared tooling: diagnostics, static analysis, scaffolding, CI verification, documentation
 
 ## Guiding objectives
@@ -169,7 +169,7 @@ final class CreateThingController extends Controller
 }
 ```
 
-The trade-off is that developers unfamiliar with Zolta must mentally resolve several attributes to understand the complete runtime path.
+The trade-off is that developers unfamiliar with Talred must mentally resolve several attributes to understand the complete runtime path.
 
 ### Risks
 
@@ -342,7 +342,7 @@ A production workflow exposed a concrete adapter defect:
 
 ```text
 Controller throws Symfony NotFoundHttpException
-  → zolta/http renders HTTP 500 with code server.error
+  → talred/http renders HTTP 500 with code server.error
   → Nuxt BFF classifies the Laravel response as an upstream failure
   → user receives HTTP 502 instead of the expected HTTP 404
 ```
@@ -413,7 +413,7 @@ ApplicationFailure
 
 #### Map failures in adapters
 
-`zolta/http` maps application failures to HTTP responses. A console adapter can map the same failure to exit codes and messages.
+`talred/http` maps application failures to HTTP responses. A console adapter can map the same failure to exit codes and messages.
 
 #### Define a stable error envelope
 
@@ -444,7 +444,7 @@ Controllers or services should declare expected failures, or the framework shoul
 
 ### Observation
 
-Zolta provides an effective domain-event pipeline:
+Talred provides an effective domain-event pipeline:
 
 ```text
 Aggregate records event
@@ -534,7 +534,7 @@ Domain events should optionally expose:
 
 ### Observation
 
-Zolta encourages clean modular architecture, but PHP itself does not prevent:
+Talred encourages clean modular architecture, but PHP itself does not prevent:
 
 - Domain code importing Laravel.
 - One service importing another service’s infrastructure.
@@ -589,7 +589,7 @@ Real applications sometimes need deliberate exceptions. Require a documented att
 ### Acceptance criteria
 
 - Boundary violations fail CI with actionable messages.
-- Rules are configurable but strict by default in new Zolta applications.
+- Rules are configurable but strict by default in new Talred applications.
 - Exceptions are explicit, documented, and discoverable.
 
 ---
@@ -628,7 +628,7 @@ Stubs should:
 
 - follow current naming conventions
 - include strict types
-- contain correct Zolta attributes
+- contain correct Talred attributes
 - include generic/static-analysis annotations
 - create a focused test skeleton
 - avoid adding infrastructure until requested
@@ -744,7 +744,7 @@ Architecture diagnostics can then distinguish intentional manual code from accid
 
 ### Observation
 
-Testing a full Zolta flow may require map generation, container configuration, authentication setup, and payload inspection.
+Testing a full Talred flow may require map generation, container configuration, authentication setup, and payload inspection.
 
 ### Proposed solutions
 
@@ -793,7 +793,7 @@ Package test utilities should make it straightforward to assert:
 
 ### Acceptance criteria
 
-- Feature packages can test Zolta pipelines without duplicating setup.
+- Feature packages can test Talred pipelines without duplicating setup.
 - Event and map assertions are first-class.
 - Tests clearly distinguish application failure from infrastructure failure.
 
@@ -864,7 +864,7 @@ Highest value with low architectural risk:
 
 The framework improvements are successful when:
 
-- A new developer can trace any endpoint or event without reading Zolta internals.
+- A new developer can trace any endpoint or event without reading Talred internals.
 - Stale maps identify themselves instead of resembling missing code.
 - Payload and resource mismatches fail static analysis.
 - Domain and application layers remain independent of HTTP frameworks.
@@ -875,6 +875,6 @@ The framework improvements are successful when:
 
 ## Closing note
 
-Zolta’s central strength is its predictability. The framework already guides applications toward explicit use cases, thin transport layers, protected domain models, and controlled side effects.
+Talred’s central strength is its predictability. The framework already guides applications toward explicit use cases, thin transport layers, protected domain models, and controlled side effects.
 
-The priority should not be to add abstraction for its own sake. The next stage is to make the existing abstractions more observable, more strongly typed, and easier to verify. Tooling should reinforce the architecture while preserving the straightforward execution model that makes Zolta effective.
+The priority should not be to add abstraction for its own sake. The next stage is to make the existing abstractions more observable, more strongly typed, and easier to verify. Tooling should reinforce the architecture while preserving the straightforward execution model that makes Talred effective.

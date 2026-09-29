@@ -1,16 +1,20 @@
 ---
-title: Zolta Forge
+title: Talred Forge
 description: Domain-Driven Design foundation for PHP 8.2+ — Value Objects, Entities, Aggregates, Rules, Specifications, Policies, Invariants, and Transformers.
 navigation:
   title: Introduction
   order: 0
 ---
 
-# Zolta Forge
+# Talred Forge
 
-Zolta Forge is the foundational layer of the **Zolta Framework** — a production-grade Domain-Driven Design (DDD) toolkit for PHP 8.2+. It provides the building blocks to model rich, validated, self-protecting domain objects using a declarative, attribute-driven approach.
+Talred Forge is the foundational layer of the **Talred Framework** — a production-grade Domain-Driven Design (DDD) toolkit for PHP 8.2+. It provides the building blocks to model rich, validated, self-protecting domain objects using a declarative, attribute-driven approach.
 
-## Why Zolta Forge?
+The public namespace is `Talred\...`. It is an additive compatibility layer
+over the existing `Zolta\...` implementation, so current applications can
+keep their Zolta imports while new code adopts Talred imports.
+
+## Why Talred Forge?
 
 Modern PHP applications deserve a domain modeling layer that is:
 
@@ -22,14 +26,14 @@ Modern PHP applications deserve a domain modeling layer that is:
 
 ## Core principles
 
-Zolta Forge follows these architectural principles:
+Talred Forge follows these architectural principles:
 
 1. **Hexagonal Architecture** — Domain logic is isolated from infrastructure. Adapters connect the domain to frameworks and databases.
 2. **Domain-Driven Design** — Aggregate Roots, Entities, Value Objects, Domain Events, Specifications, and Policies are first-class citizens.
 3. **Attribute-Driven Configuration** — No XML, no YAML config files for domain rules. Everything is declared with PHP 8 attributes on the classes themselves.
 4. **Fail-Fast Validation** — Invalid input is rejected at construction time, never at persistence time.
 
-## What Zolta Forge provides
+## What Talred Forge provides
 
 | Module | Purpose |
 |--------|---------|
@@ -47,7 +51,7 @@ Zolta Forge follows these architectural principles:
 
 ## The Value Object resolution pipeline
 
-The centerpiece of Zolta Forge is the **automatic VO resolution pipeline**. When you construct a Value Object, the framework executes a multi-stage pipeline:
+The centerpiece of Talred Forge is the **automatic VO resolution pipeline**. When you construct a Value Object, the framework executes a multi-stage pipeline:
 
 ```
 Input Data
@@ -74,14 +78,14 @@ Every stage is opt-in — attach only the attributes you need.
 ## Quick example
 
 ```php
-use Zolta\Domain\ValueObjects\ValueObject;
-use Zolta\Domain\Attributes\Transform;
-use Zolta\Domain\Attributes\UseRule;
-use Zolta\Domain\Attributes\UseSpecification;
-use Zolta\Domain\Rules\NonEmptyRule;
-use Zolta\Domain\Rules\MaxLengthRule;
-use Zolta\Domain\Transformers\EmailNormalizer;
-use Zolta\Domain\Specifications\EmailFormatSpecification;
+use Talred\Domain\ValueObjects\ValueObject;
+use Talred\Domain\Attributes\Transform;
+use Talred\Domain\Attributes\UseRule;
+use Talred\Domain\Attributes\UseSpecification;
+use Talred\Domain\Rules\NonEmptyRule;
+use Talred\Domain\Rules\MaxLengthRule;
+use Talred\Domain\Transformers\EmailNormalizer;
+use Talred\Domain\Specifications\EmailFormatSpecification;
 
 class Email extends ValueObject
 {
@@ -107,15 +111,15 @@ $email = Email::resolve(['address' => '  John@Example.COM  ']);
 // → Email { address: 'john@example.com', verifiedAt: null }
 ```
 
-## Zolta Framework ecosystem
+## Talred Framework ecosystem
 
-Zolta Forge is one of three packages in the Zolta Framework:
+Talred Forge is one of three packages in the Talred Framework:
 
 | Package | Purpose |
 |---------|---------|
-| **Zolta Forge** | DDD foundation — Value Objects, Entities, Rules, Specifications |
-| [Zolta CQRS](/cqrs) | Command/Query buses, Application Services, Repositories, Events |
-| [Zolta HTTP](/http) | Attribute-based HTTP routing, Request validation, API responses |
+| **Talred Forge** | DDD foundation — Value Objects, Entities, Rules, Specifications |
+| [Talred CQRS](/cqrs) | Command/Query buses, Application Services, Repositories, Events |
+| [Talred HTTP](/http) | Attribute-based HTTP routing, Request validation, API responses |
 
 ## Requirements
 

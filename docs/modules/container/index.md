@@ -8,14 +8,14 @@ navigation:
 
 # Container & Registry
 
-Zolta Forge provides a framework-neutral container system through PSR-11 compatibility. The `ContainerRegistry` acts as a global entry point for resolving framework-bound services while remaining decoupled from any specific framework.
+Talred Forge provides a framework-neutral container system through PSR-11 compatibility. The `ContainerRegistry` acts as a global entry point for resolving framework-bound services while remaining decoupled from any specific framework.
 
 ## ZoltaForgeContainer
 
 A PSR-11 compliant wrapper around the host framework's container:
 
 ```php
-namespace Zolta\Support;
+namespace Talred\Support;
 
 use Psr\Container\ContainerInterface;
 
@@ -35,7 +35,7 @@ The wrapper checks `has()` first. If the underlying container exposes `hasParame
 Central static registry for the global container instance:
 
 ```php
-namespace Zolta\Support;
+namespace Talred\Support;
 
 use Psr\Container\ContainerInterface;
 
@@ -52,7 +52,7 @@ final class ContainerRegistry
 In Laravel, this happens automatically in the service provider:
 
 ```php
-use Zolta\Support\ContainerRegistry;
+use Talred\Support\ContainerRegistry;
 
 // In a service provider boot() method
 ContainerRegistry::set(app());
@@ -71,8 +71,8 @@ ContainerRegistry::set(new MyContainer());
 ### Resolving services
 
 ```php
-use Zolta\Support\ContainerRegistry;
-use Zolta\Support\Contracts\NormalizerInterface;
+use Talred\Support\ContainerRegistry;
+use Talred\Support\Contracts\NormalizerInterface;
 
 // Direct container access
 $normalizer = ContainerRegistry::get()->get(NormalizerInterface::class);
@@ -93,7 +93,7 @@ $normalizer = ContainerRegistry::resolve(NormalizerInterface::class);
 
 ## Helper functions
 
-Zolta provides global helper functions in `helpers.php`:
+Talred provides global helper functions in `helpers.php`:
 
 ### `app()`
 
@@ -146,7 +146,7 @@ Framework-agnostic logger resolver with fallback chain:
 Utility for parsing boolean-like values from strings, form inputs, and configuration:
 
 ```php
-namespace Zolta\Support\Casts;
+namespace Talred\Support\Casts;
 
 final class BooleanParser
 {
@@ -191,7 +191,7 @@ final class BooleanParser
 ### Usage
 
 ```php
-use Zolta\Support\Casts\BooleanParser;
+use Talred\Support\Casts\BooleanParser;
 
 $result = BooleanParser::parse('yes');   // true
 $result = BooleanParser::parse('off');   // false
@@ -206,7 +206,7 @@ $isActive = BooleanParser::parse($request->query('active')) ?? true;
 The contract for DTO-to-array normalization:
 
 ```php
-namespace Zolta\Support\Contracts;
+namespace Talred\Support\Contracts;
 
 interface NormalizerInterface
 {
@@ -217,7 +217,7 @@ interface NormalizerInterface
 ### Default implementation
 
 ```php
-namespace Zolta\Support\Serialization;
+namespace Talred\Support\Serialization;
 
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 

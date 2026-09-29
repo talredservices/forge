@@ -13,7 +13,7 @@ Invariants enforce structural guarantees across **multiple properties** of a Val
 ## Invariant interface
 
 ```php
-use Zolta\Domain\Interfaces\Invariant;
+use Talred\Domain\Interfaces\Invariant;
 
 interface Invariant
 {
@@ -24,7 +24,7 @@ interface Invariant
 ## Abstract Invariant contract
 
 ```php
-use Zolta\Domain\Contracts\Invariant;
+use Talred\Domain\Contracts\Invariant;
 
 abstract class Invariant implements InvariantInterface
 {
@@ -50,7 +50,7 @@ abstract class Invariant implements InvariantInterface
 Attach invariants at the class level with `#[UseInvariant]`:
 
 ```php
-use Zolta\Domain\Attributes\UseInvariant;
+use Talred\Domain\Attributes\UseInvariant;
 
 #[UseInvariant(CreditInvariant::class)]
 class Credit extends ValueObject
@@ -150,8 +150,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Invariants;
 
-use Zolta\Domain\Contracts\Invariant;
-use Zolta\Domain\Interfaces\VO;
+use Talred\Domain\Contracts\Invariant;
+use Talred\Domain\Interfaces\VO;
 
 class DateRangeInvariant extends Invariant
 {

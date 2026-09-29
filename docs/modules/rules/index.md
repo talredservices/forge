@@ -13,7 +13,7 @@ Rules are guard-style validators that enforce constraints on individual values. 
 ## Rule interface
 
 ```php
-use Zolta\Domain\Interfaces\Rule;
+use Talred\Domain\Interfaces\Rule;
 
 interface Rule
 {
@@ -26,7 +26,7 @@ interface Rule
 The `Rule` abstract contract provides composition and an `apply()` method:
 
 ```php
-use Zolta\Domain\Contracts\Rule;
+use Talred\Domain\Contracts\Rule;
 
 abstract class Rule implements RuleInterface
 {
@@ -50,9 +50,9 @@ abstract class Rule implements RuleInterface
 Attach rules to constructor properties with `#[UseRule]`:
 
 ```php
-use Zolta\Domain\Attributes\UseRule;
-use Zolta\Domain\Rules\NonEmptyRule;
-use Zolta\Domain\Rules\MaxLengthRule;
+use Talred\Domain\Attributes\UseRule;
+use Talred\Domain\Rules\NonEmptyRule;
+use Talred\Domain\Rules\MaxLengthRule;
 
 class ProductName extends ValueObject
 {
@@ -203,7 +203,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Rules;
 
-use Zolta\Domain\Contracts\Rule;
+use Talred\Domain\Contracts\Rule;
 
 class MinimumAmountRule extends Rule
 {

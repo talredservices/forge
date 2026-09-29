@@ -13,7 +13,7 @@ Specifications evaluate boolean business rules against a candidate value. Unlike
 ## Specification interface
 
 ```php
-use Zolta\Domain\Interfaces\Specification;
+use Talred\Domain\Interfaces\Specification;
 
 interface Specification
 {
@@ -25,7 +25,7 @@ interface Specification
 ## Abstract Specification contract
 
 ```php
-use Zolta\Domain\Contracts\Specification;
+use Talred\Domain\Contracts\Specification;
 
 abstract class Specification implements SpecificationInterface
 {
@@ -42,9 +42,9 @@ abstract class Specification implements SpecificationInterface
 Attach specifications with `#[UseSpecification]`:
 
 ```php
-use Zolta\Domain\Attributes\UseSpecification;
-use Zolta\Domain\Specifications\EmailFormatSpecification;
-use Zolta\Domain\Specifications\AllowedDomainSpecification;
+use Talred\Domain\Attributes\UseSpecification;
+use Talred\Domain\Specifications\EmailFormatSpecification;
+use Talred\Domain\Specifications\AllowedDomainSpecification;
 
 class Email extends ValueObject
 {
@@ -163,7 +163,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Specifications;
 
-use Zolta\Domain\Contracts\Specification;
+use Talred\Domain\Contracts\Specification;
 
 class UniqueEmailSpecification extends Specification
 {

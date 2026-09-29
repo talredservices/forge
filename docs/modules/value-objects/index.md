@@ -8,14 +8,14 @@ navigation:
 
 # Value Objects
 
-Value Objects are the fundamental building blocks in Zolta Forge. They represent domain concepts as immutable, self-validating objects that are compared by value rather than identity.
+Value Objects are the fundamental building blocks in Talred Forge. They represent domain concepts as immutable, self-validating objects that are compared by value rather than identity.
 
 ## Base class
 
 All Value Objects extend `ValueObject`:
 
 ```php
-use Zolta\Domain\ValueObjects\ValueObject;
+use Talred\Domain\ValueObjects\ValueObject;
 ```
 
 ### Key methods
@@ -40,10 +40,10 @@ declare(strict_types=1);
 
 namespace App\Domain\ValueObjects;
 
-use Zolta\Domain\ValueObjects\ValueObject;
-use Zolta\Domain\Attributes\UseRule;
-use Zolta\Domain\Rules\NonEmptyRule;
-use Zolta\Domain\Rules\MaxLengthRule;
+use Talred\Domain\ValueObjects\ValueObject;
+use Talred\Domain\Attributes\UseRule;
+use Talred\Domain\Rules\NonEmptyRule;
+use Talred\Domain\Rules\MaxLengthRule;
 
 class ProductName extends ValueObject
 {
@@ -86,8 +86,8 @@ class Money extends ValueObject
 PHP enums can implement the `VO` interface:
 
 ```php
-use Zolta\Domain\Interfaces\VO;
-use Zolta\Domain\ValueObjects\VOConstructionContext;
+use Talred\Domain\Interfaces\VO;
+use Talred\Domain\ValueObjects\VOConstructionContext;
 
 enum OAuthProvider: string implements VO
 {
@@ -157,7 +157,7 @@ Use direct construction only when restoring from persistence (data is already va
 Pass runtime options to control the resolution:
 
 ```php
-use Zolta\Domain\ValueObjects\VOConstructionContext;
+use Talred\Domain\ValueObjects\VOConstructionContext;
 
 $context = new VOConstructionContext(
     runtimePreprocessors: [
@@ -184,7 +184,7 @@ $email = Email::resolve(['address' => 'TEST@EXAMPLE.COM'], $context);
 Extend `AbstractUuid` for typed identifier Value Objects:
 
 ```php
-use Zolta\Domain\ValueObjects\AbstractUuid;
+use Talred\Domain\ValueObjects\AbstractUuid;
 
 class OrderId extends AbstractUuid {}
 class UserId extends AbstractUuid {}
@@ -211,7 +211,7 @@ $id->toArray();     // ['value' => '550e8400-...']
 
 ## Built-in Value Objects
 
-Zolta Forge ships with production-ready VOs:
+Talred Forge ships with production-ready VOs:
 
 | Value Object | Properties | Rules / Specs |
 |-------------|-----------|---------------|
@@ -232,7 +232,7 @@ Zolta Forge ships with production-ready VOs:
 ### Password VO
 
 ```php
-use Zolta\Domain\ValueObjects\Password;
+use Talred\Domain\ValueObjects\Password;
 
 // Hash a plain password
 $password = Password::resolve(['hash' => 'MySecret123!']);
@@ -245,7 +245,7 @@ $password = Password::fromHashed($hashedString);
 ### AccessToken VO
 
 ```php
-use Zolta\Domain\ValueObjects\AccessToken;
+use Talred\Domain\ValueObjects\AccessToken;
 
 // Generate a new token with 30-day TTL
 $token = AccessToken::generate(ttlSeconds: 2592000);
@@ -256,7 +256,7 @@ $token->isExpired();      // false
 ### VerificationCode VO
 
 ```php
-use Zolta\Domain\ValueObjects\VerificationCode;
+use Talred\Domain\ValueObjects\VerificationCode;
 
 $code = VerificationCode::generate(); // Random 6-digit code
 $code->get('code'); // e.g. "482910"
@@ -355,7 +355,7 @@ $credential->get('password'); // Password VO instance
 The resolution pipeline uses `ReflectionCache` to avoid repeated reflection calls:
 
 ```php
-use Zolta\Domain\Cache\ReflectionCache;
+use Talred\Domain\Cache\ReflectionCache;
 
 // Cache is populated automatically during resolution
 // Metadata (attributes, constructor parameters) is cached after first use

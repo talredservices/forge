@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Install and configure Zolta Forge in your PHP application.
+description: Install and configure Talred Forge in your PHP application.
 navigation:
   title: Getting Started
   order: 1
@@ -13,12 +13,15 @@ navigation:
 Install via Composer:
 
 ```bash
-composer require zoltasoft/forge
+composer require talred/forge
 ```
+
+Use `Talred\...` namespaces in new code. Existing `Zolta\...` imports remain
+supported by the compatibility layer while the package is migrated in stages.
 
 ### Laravel
 
-Zolta Forge auto-discovers its framework adapter via Composer metadata. No manual service provider registration is needed.
+Talred Forge auto-discovers its framework adapter via Composer metadata. No manual service provider registration is needed.
 
 The adapter provides:
 
@@ -32,7 +35,7 @@ Symfony support is partially available. Register the adapter manually in your ke
 
 ## Project structure
 
-Zolta Forge encourages a layered architecture. A typical service domain follows this layout:
+Talred Forge encourages a layered architecture. A typical service domain follows this layout:
 
 ```
 app/
@@ -79,10 +82,10 @@ declare(strict_types=1);
 
 namespace App\Services\OrderService\Domain\ValueObjects;
 
-use Zolta\Domain\ValueObjects\ValueObject;
-use Zolta\Domain\Attributes\UseRule;
-use Zolta\Domain\Rules\NonEmptyRule;
-use Zolta\Domain\Rules\MaxLengthRule;
+use Talred\Domain\ValueObjects\ValueObject;
+use Talred\Domain\Attributes\UseRule;
+use Talred\Domain\Rules\NonEmptyRule;
+use Talred\Domain\Rules\MaxLengthRule;
 
 class ProductName extends ValueObject
 {
@@ -136,7 +139,7 @@ declare(strict_types=1);
 
 namespace App\Services\OrderService\Domain\ValueObjects;
 
-use Zolta\Domain\ValueObjects\AbstractUuid;
+use Talred\Domain\ValueObjects\AbstractUuid;
 
 class OrderId extends AbstractUuid {}
 ```
@@ -164,7 +167,7 @@ declare(strict_types=1);
 
 namespace App\Services\OrderService\Domain\Aggregates;
 
-use Zolta\Domain\Aggregates\AggregateRoot;
+use Talred\Domain\Aggregates\AggregateRoot;
 use App\Services\OrderService\Domain\ValueObjects\OrderId;
 use App\Services\OrderService\Domain\ValueObjects\Money;
 use App\Services\OrderService\Domain\Events\OrderCreated;

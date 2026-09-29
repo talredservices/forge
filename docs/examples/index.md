@@ -1,6 +1,6 @@
 ---
 title: Examples
-description: Real-world examples from the Zolta reference application.
+description: Real-world examples from the Talred reference application.
 navigation:
   title: Examples
   order: 12
@@ -8,7 +8,7 @@ navigation:
 
 # Examples
 
-These examples are drawn from the Zolta reference application and demonstrate real-world usage of the framework.
+These examples are drawn from the Talred reference application and demonstrate real-world usage of the framework.
 
 ## User aggregate
 
@@ -29,7 +29,7 @@ use App\Domain\ValueObjects\Email;
 use App\Domain\ValueObjects\HashedPassword;
 use App\Domain\ValueObjects\UserId;
 use App\Domain\ValueObjects\Username;
-use Zolta\Domain\Aggregates\AggregateRoot;
+use Talred\Domain\Aggregates\AggregateRoot;
 
 class User extends AggregateRoot
 {
@@ -174,7 +174,7 @@ class HashedPassword extends ValueObject
 ### Domain events
 
 ```php
-use Zolta\Domain\Events\Contracts\EventInterface;
+use Talred\Domain\Events\Contracts\EventInterface;
 
 final readonly class UserCreatedEvent implements EventInterface
 {
@@ -273,7 +273,7 @@ class Role extends Entity
 ### Application service
 
 ```php
-use Zolta\Support\Application\Attributes\AsApplicationService;
+use Talred\Support\Application\Attributes\AsApplicationService;
 
 #[AsApplicationService]
 class PermissionService
@@ -348,7 +348,7 @@ class Credit extends ValueObject
 ### Specification-based filtering
 
 ```php
-use Zolta\Domain\Contracts\Specification;
+use Talred\Domain\Contracts\Specification;
 
 class MinimumBalanceSpecification extends Specification
 {

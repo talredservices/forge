@@ -1,6 +1,6 @@
 ---
 title: Advanced
-description: Internals, extension points, and advanced patterns for Zolta Forge.
+description: Internals, extension points, and advanced patterns for Talred Forge.
 navigation:
   title: Advanced
   order: 13
@@ -92,7 +92,7 @@ For hot paths resolving thousands of VOs, the cache ensures near-zero overhead a
 ### Rule composition
 
 ```php
-use Zolta\Domain\Contracts\Rule;
+use Talred\Domain\Contracts\Rule;
 
 // AND composition — both rules must pass
 $rule = (new NonEmptyRule())->and(new MaxLengthRule());
@@ -104,7 +104,7 @@ $rule = (new UuidRule())->or(new SlugRule());
 ### Specification composition
 
 ```php
-use Zolta\Domain\Contracts\Specification;
+use Talred\Domain\Contracts\Specification;
 
 // AND — both must be satisfied
 $spec = (new EmailFormatSpecification())->and(new AllowedDomainSpecification());
@@ -126,7 +126,7 @@ $spec = (new EmailFormatSpecification())
 ### Invariant composition
 
 ```php
-use Zolta\Domain\Contracts\Invariant;
+use Talred\Domain\Contracts\Invariant;
 
 // AND — both invariants must hold
 $invariant = (new BalanceInvariant())->and(new CurrencyInvariant());
@@ -138,7 +138,7 @@ $invariant = (new StandardCreditInvariant())->or(new PromotionalCreditInvariant(
 ### Policy composition
 
 ```php
-use Zolta\Domain\Contracts\Policy;
+use Talred\Domain\Contracts\Policy;
 
 // AND — both policies applied sequentially
 $policy = (new EmailPolicy())->and(new PasswordPolicy());
@@ -155,7 +155,7 @@ declare(strict_types=1);
 
 namespace Zolta\Adapters\Slim;
 
-use Zolta\Framework\FrameworkAdapterInterface;
+use Talred\Framework\FrameworkAdapterInterface;
 
 class SlimAdapter implements FrameworkAdapterInterface
 {
@@ -172,8 +172,8 @@ class SlimAdapter implements FrameworkAdapterInterface
     public static function bindings(): array
     {
         return [
-            \Zolta\Support\Contracts\NormalizerInterface::class
-                => \Zolta\Support\Serialization\Normalizer::class,
+            \Talred\Support\Contracts\NormalizerInterface::class
+                => \Talred\Support\Serialization\Normalizer::class,
             \Psr\Log\LoggerInterface::class
                 => \Monolog\Logger::class,
         ];
@@ -194,8 +194,8 @@ Register via Composer metadata:
 Then bootstrap in your application entry point:
 
 ```php
-use Zolta\Framework\FrameworkBootstrap;
-use Zolta\Support\ContainerRegistry;
+use Talred\Framework\FrameworkBootstrap;
+use Talred\Support\ContainerRegistry;
 
 FrameworkBootstrap::boot();
 ContainerRegistry::set($container); // Your PSR-11 container
