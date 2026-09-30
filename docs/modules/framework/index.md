@@ -56,7 +56,7 @@ interface FrameworkAdapterInterface
 
 declare(strict_types=1);
 
-namespace Zolta\Adapters\Laravel;
+namespace App\Adapters\Laravel;
 
 use Talred\Framework\FrameworkAdapterInterface;
 
@@ -115,7 +115,7 @@ Register your adapter in `composer.json`:
 {
     "name": "talred/forge-laravel-adapter",
     "extra": {
-        "zolta-framework-adapter": "Zolta\\Adapters\\Laravel\\LaravelAdapter"
+        "zolta-framework-adapter": "App\\Adapters\\Laravel\\LaravelAdapter"
     }
 }
 ```
@@ -126,8 +126,8 @@ Multiple adapters per package:
 {
     "extra": {
         "zolta-framework-adapter": [
-            "Zolta\\Adapters\\Laravel\\LaravelAdapter",
-            "Zolta\\Adapters\\Laravel\\LaravelCacheAdapter"
+            "App\\Adapters\\Laravel\\LaravelAdapter",
+            "App\\Adapters\\Laravel\\LaravelCacheAdapter"
         ]
     }
 }

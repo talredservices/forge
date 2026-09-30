@@ -153,7 +153,7 @@ To support a new framework, implement `FrameworkAdapterInterface`:
 
 declare(strict_types=1);
 
-namespace Zolta\Adapters\Slim;
+namespace App\Adapters\Slim;
 
 use Talred\Framework\FrameworkAdapterInterface;
 
@@ -186,7 +186,7 @@ Register via Composer metadata:
 ```json
 {
     "extra": {
-        "zolta-framework-adapter": "Zolta\\Adapters\\Slim\\SlimAdapter"
+        "zolta-framework-adapter": "App\\Adapters\\Slim\\SlimAdapter"
     }
 }
 ```
